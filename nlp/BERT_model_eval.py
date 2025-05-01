@@ -360,7 +360,7 @@ def run_source_credibility_analysis() -> None:
     # Simple cleaning
     def clean(text: str) -> str:
         text = text.lower().translate(str.maketrans("", "", string.punctuation))
-        return text
+    return text
 
     train_liar["clean"] = train_liar["Statement"].map(clean)
     test_liar["clean"] = test_liar["Statement"].map(clean)
@@ -393,12 +393,12 @@ def run_source_credibility_analysis() -> None:
             )
             if device != -1:
                 inputs = {k: v.to(device) for k, v in inputs.items()}
-            with torch.no_grad():
-                outputs = model(**inputs)
-                cls = outputs.last_hidden_state[:, 0, :].cpu().numpy()
-                vecs.append(cls)
-            del inputs, outputs
-            gc.collect()
+        with torch.no_grad():
+            outputs = model(**inputs)
+            cls = outputs.last_hidden_state[:, 0, :].cpu().numpy()
+            vecs.append(cls)
+        del inputs, outputs
+        gc.collect()
         return np.vstack(vecs)
 
     CACHE_DIR = data_root / "bert_cache"  # e.g. nlp/data/bert_cache
