@@ -106,3 +106,14 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# ───────── Project-specific (fake-news NLP) ─────────
+# Data and derived artifacts (keep repo small)
+nlp/data/
+models/
+# Large tensor / model files
+*.pt
+*.h5
+*.keras
+*.npy
+*.npz
