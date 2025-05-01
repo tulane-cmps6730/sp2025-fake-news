@@ -13,16 +13,47 @@ LABELS = ["supports", "contradicts", "neutral"]
 TEMPLATE = "The article {} the claim: '{}'."
 
 
-def load_classifier(model_name: str = "roberta-large-mnli"):  # pragma: no cover
+# --------------------------------
+# Device helpers
+# --------------------------------
+
+
+def _select_device(choice: str = "auto"):
+    choice = choice.lower()
+
+    if choice == "cuda":
+        return 0 if torch.cuda.is_available() else -1
+    if choice == "mps":
+        return "mps" if torch.backends.mps.is_available() else -1
+    if choice == "cpu":
+        return -1
+
+    # auto mode
+    if torch.cuda.is_available():
+        return 0
+    if torch.backends.mps.is_available():
+        return "mps"
+    return -1
+
+
+def load_classifier(
+    model_name: str = "roberta-large-mnli", *, device: str = "auto"
+) -> "transformers.pipelines.Pipeline":  # pragma: no cover
     """Return a Hugging-Face zero-shot classification pipeline.
 
-    Uses GPU if available, else CPU.
+    Parameters
+    ----------
+    model_name : str, optional
+        HF model checkpoint (default ``roberta-large-mnli``).
+    device : {"auto", "cpu", "cuda", "mps"}, optional
+        Compute backend for inference. "auto" prefers CUDA → MPS → CPU.
     """
-    device = 0 if torch.cuda.is_available() else -1
+
+    device_id = _select_device(device)
     clf = pipeline(
         "zero-shot-classification",
         model=model_name,
-        device=device,
+        device=device_id,
         framework="pt",  # ensure PyTorch is used
     )
     return clf
