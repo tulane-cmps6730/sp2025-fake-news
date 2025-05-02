@@ -1,5 +1,7 @@
 # Fake News Detection and Source Credibility Analysis
 
+An interactive demo is available in `notebooks/Demo.ipynb`.
+
 ## Goals
 
 Fake news undermines public trust and can sway social, political and economic outcomes.  Our goal is to build a *transparent* pipeline that

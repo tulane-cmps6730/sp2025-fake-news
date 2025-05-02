@@ -108,25 +108,16 @@ ENV/
 .mypy_cache/
 
 # ───────── Project-specific (fake-news NLP) ─────────
-# Data and derived artifacts (keep repo small)
-nlp/data/
-models/
-# Large tensor / model files
-*.pt
-*.h5
-*.keras
-*.npy
-*.npz
+!nlp/data/                 
 
-# ------- Exceptions: keep cached numpy features ----------
+nlp/data/**                
+
 !nlp/data/bert_cache/
 !nlp/data/bert_cache/*.npy
+!nlp/data/preprocessed/
 !nlp/data/preprocessed/*_ner.npy
 !nlp/data/preprocessed/*_stance*.npy
-
-# Allow pickled model heads
 !nlp/data/preprocessed/bert_ner_model.pkl
 !nlp/data/preprocessed/bert_ner_stance_model.pkl
 
-# Still ignore CSV/PT files inside data directories
 nlp/data/**/*.csv
