@@ -139,6 +139,33 @@ If you want to perform a completely fresh run (e.g., to regenerate all caches), 
 
 *ROC curve for the LSTM model with Word2Vec embeddings. The lower AUC (0.790) compared to transformer-based models demonstrates the advantages of pre-trained contextual embeddings.*
 
+### Demo Screenshots
+
+#### Initial Model Run
+<img src="report/image/run.png" width="800" alt="Initial Run"/>
+
+*Screenshot showing the initial execution of the BERT model evaluation script.*
+
+#### Model Evaluation and Cross-Validation
+<img src="report/image/evaluation_1.png" width="800" alt="Model Evaluation"/>
+
+*Comparison between BERT baseline and BERT+NER models, including 5-fold cross-validation results demonstrating model stability.*
+
+#### Source Credibility Analysis - Linear SVM
+<img src="report/image/source_credibility_analysis_part1.png" width="800" alt="Source Credibility SVM"/>
+
+*Results of source credibility analysis using Linear SVM on the LIAR and GossipCop datasets.*
+
+#### Source Credibility Analysis - 2-Layer MLP
+<img src="report/image/source_credibility_analysis_part2.png" width="800" alt="Source Credibility MLP"/>
+
+*Extended source credibility analysis using a 2-layer MLP.*
+
+#### Stance Detection Results
+<img src="report/image/stance_detection.png" width="800" alt="Stance Detection"/>
+
+*Integration results of the stance detection component.*
+
 ### Summary
 * **BERT + NER** achieves **94% accuracy / 0.99 ROC-AUC** on the held-out test set—on par with a TF-IDF logistic baseline but with better calibration.
 * Adding the stance one-hot lifts accuracy to **94.3%** and F1 to **0.946**, confirming headline-body contradictions provide complementary signal.
