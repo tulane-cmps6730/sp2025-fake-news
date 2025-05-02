@@ -125,15 +125,18 @@ If you want to perform a completely fresh run (e.g., to regenerate all caches), 
 ### ROC Curves
 
 #### BERT Baseline
-![BERT ROC](report/image/roc_curve_BERT.png)
+<img src="report/image/roc_curve_BERT.png" width="600" height="400" alt="BERT ROC"/>
+
 *ROC curve for the baseline BERT model using only CLS embeddings. The high AUC (0.992) indicates strong discriminative power even with just contextual embeddings.*
 
 #### BERT + NER
-![BERT+NER ROC](report/image/roc_curve_BERT_NER.png)
+<img src="report/image/roc_curve_BERT_NER.png" width="600" height="400" alt="BERT+NER ROC"/>
+
 *ROC curve comparing BERT baseline with BERT+NER model. The addition of named entity features maintains the strong performance while providing interpretable signals about entity patterns in fake vs. real news.*
 
 #### LSTM Comparison
-![LSTM ROC](report/image/roc_curve_lstm.png)
+<img src="report/image/roc_curve_lstm.png" width="600" height="400" alt="LSTM ROC"/>
+
 *ROC curve for the LSTM model with Word2Vec embeddings. The lower AUC (0.790) compared to transformer-based models demonstrates the advantages of pre-trained contextual embeddings.*
 
 ### Summary
