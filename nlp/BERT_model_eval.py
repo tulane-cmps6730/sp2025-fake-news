@@ -202,7 +202,7 @@ def main(argv: list[str] | None = None) -> None:  # noqa: D401
 
     print("\n=== Evaluation: Logistic Regression (BERT + NER) ===")
     print(f"Accuracy : {accuracy_score(y_test, y_pred):.4f}")
-    print(f"Precision: {precision_score(y_test, y_pred):.4f}")
+print(f"Precision: {precision_score(y_test, y_pred):.4f}")
     print(f"Recall   : {recall_score(y_test, y_pred):.4f}")
     print(f"F1 Score : {f1_score(y_test, y_pred):.4f}\n")
     print(classification_report(y_test, y_pred, target_names=["REAL", "FAKE"]))
@@ -213,7 +213,7 @@ def main(argv: list[str] | None = None) -> None:  # noqa: D401
     print(f"Saved model → {model_path}", file=sys.stderr)
 
     y_prob = clf.predict_proba(X_test_pca)[:, 1]
-    roc_auc = roc_auc_score(y_test, y_prob)
+roc_auc = roc_auc_score(y_test, y_prob)
     fpr, tpr, _ = roc_curve(y_test, y_prob)
 
     # -------------------- 6b. Cross-validation --------------------
@@ -243,17 +243,17 @@ def main(argv: list[str] | None = None) -> None:  # noqa: D401
 
     print("\n=== Evaluation: BERT Only (Baseline) ===")
     print(f"Accuracy : {accuracy_score(y_test, y_pred_base):.4f}")
-    print(f"Precision: {precision_score(y_test, y_pred_base):.4f}")
+print(f"Precision: {precision_score(y_test, y_pred_base):.4f}")
     print(f"Recall   : {recall_score(y_test, y_pred_base):.4f}")
     print(f"F1 Score : {f1_score(y_test, y_pred_base):.4f}\n")
     print(classification_report(y_test, y_pred_base, target_names=["REAL", "FAKE"]))
 
     y_prob_base = clf_base.predict_proba(X_test_base)[:, 1]
-    roc_auc_base = roc_auc_score(y_test, y_prob_base)
+roc_auc_base = roc_auc_score(y_test, y_prob_base)
     fpr_b, tpr_b, _ = roc_curve(y_test, y_prob_base)
 
     # -------------------- 8. Plot ROC curves -----------------------
-    plt.figure(figsize=(8, 6))
+plt.figure(figsize=(8, 6))
     plt.plot(fpr, tpr, label=f"BERT+NER (area={roc_auc:.4f})", color="tab:blue")
     plt.plot(
         fpr_b, tpr_b, label=f"BERT Only (area={roc_auc_base:.4f})", color="tab:green"
@@ -264,7 +264,7 @@ def main(argv: list[str] | None = None) -> None:  # noqa: D401
     plt.title("ROC Curve – Logistic Regression vs. Baseline")
     plt.legend(loc="lower right")
     plt.tight_layout()
-    plt.show()
+plt.show()
 
     # -------------------- 9. Source-Credibility Analysis ----------
     if not args.skip_source:
