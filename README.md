@@ -113,9 +113,33 @@ If you want to perform a completely fresh run (e.g., to regenerate all caches), 
 
 ## Conclusions
 
-* **BERT + NER** achieves **94 % accuracy / 0.99 ROC-AUC** on the held-out test set—on par with a TF-IDF logistic baseline but with better calibration.
-* Adding the stance one-hot lifts accuracy to **94.3 %** and F1 to **0.946**, confirming headline-body contradictions provide complementary signal.
-* Source-credibility transfer is hard: the linear SVM scores ~0.60 accuracy on LIAR and 0.59 on GossipCop; the MLP head boosts GossipCop accuracy but lowers F1/AUC.  Frozen CLS embeddings need domain-specific fine-tuning for robust cross-source performance.
+### Key Results
+
+| Model | Acc. | Prec. | Rec. | F1 | AUC |
+|-------|-------|-------|------|-----|-----|
+| LR | 0.960 | 0.960 | 0.960 | 0.960 | 0.960 |
+| LSTM | 0.730 | 0.720 | 0.780 | 0.750 | 0.790 |
+| BERT + NER | 0.939 | 0.941 | 0.942 | 0.941 | 0.992 |
+| + Stance | 0.943 | 0.946 | 0.946 | 0.946 | 0.986 |
+
+### ROC Curves
+
+#### BERT Baseline
+![BERT ROC](report/image/roc_curve_BERT.png)
+*ROC curve for the baseline BERT model using only CLS embeddings. The high AUC (0.992) indicates strong discriminative power even with just contextual embeddings.*
+
+#### BERT + NER
+![BERT+NER ROC](report/image/roc_curve_BERT_NER.png)
+*ROC curve comparing BERT baseline with BERT+NER model. The addition of named entity features maintains the strong performance while providing interpretable signals about entity patterns in fake vs. real news.*
+
+#### LSTM Comparison
+![LSTM ROC](report/image/roc_curve_lstm.png)
+*ROC curve for the LSTM model with Word2Vec embeddings. The lower AUC (0.790) compared to transformer-based models demonstrates the advantages of pre-trained contextual embeddings.*
+
+### Summary
+* **BERT + NER** achieves **94% accuracy / 0.99 ROC-AUC** on the held-out test set—on par with a TF-IDF logistic baseline but with better calibration.
+* Adding the stance one-hot lifts accuracy to **94.3%** and F1 to **0.946**, confirming headline-body contradictions provide complementary signal.
+* Source-credibility transfer is hard: the linear SVM scores ~0.60 accuracy on LIAR and 0.59 on GossipCop; the MLP head boosts GossipCop accuracy but lowers F1/AUC. Frozen CLS embeddings need domain-specific fine-tuning for robust cross-source performance.
 * The full pipeline—including NER, stance and caching—runs in <10 min on MPS once caches are built, and subsequent runs load instantly.
 
 See `report/report.tex` for further details.
